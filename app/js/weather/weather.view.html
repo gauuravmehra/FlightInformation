@@ -1,0 +1,28 @@
+<div class="row weatherListContainer">
+    <h1>Weather List</h1>
+    <ul>
+        <li class="col-md-4 list" ng-repeat="list in vm.weatherList">
+            <div class="temp-tile {{ list.name | lowercase }}">
+                <a href="javascript:void(0)" ng-click="detailInfo(list.id)"><!--href="/#!/{{ list.name }}"-->
+                    <h2>{{ list.name }}</h2>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <p class="temperature">{{ list.main.temp | number:0 }}&#8451;</p>
+                        </div>
+                        <div class="col-xs-6">
+                            <dl>
+                                <dt>Sunrise</dt>
+                                <dd>{{ list.sys.sunrise * 1000 | date:"HH:mm"}}</dd>
+                            </dl>
+                            <dl>
+                                <dt>Sunset</dt>
+                                <dd>{{ list.sys.sunset * 1000 | date:"HH:mm"}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>
+    

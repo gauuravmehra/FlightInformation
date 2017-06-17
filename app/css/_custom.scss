@@ -1,0 +1,36 @@
+/* container */
+body {
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}
+
+.weatherListContainer {
+    
+    position: relative;
+
+    ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+            .temp-tile {
+                
+                a {
+                    padding: 5px;
+                    text-decoration: none;
+                    color: inherit;
+                    display: block;
+                    transition: all 0.6s ease;
+
+                    &:hover {
+                        background-color: #25aeca;
+                        color: white;
+                    }
+                }
+                
+                .temperature {
+                    font-size: 60px;
+                }
+            }
+        }
+    }
+}

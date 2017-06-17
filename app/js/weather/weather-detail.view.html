@@ -1,0 +1,29 @@
+<div class="weatherContainer">
+	<h1>{{ vm.forcastInfo.city.name }}</h1>
+
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table table-hover">
+				<thead>
+					<tr class="text-center">
+						<th>Date</th>
+						<th colspan="2">Temperature</th>
+						<th>Sea Level</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="list in vm.forcastInfo.list">
+						<th scope="row">{{ list.dt * 1000 | date:"dd/MM/yy" }}</th>
+						<td>Min: {{ list.temp.min | number:0 }}&#8451;</td>
+						<td>Max: {{ list.temp.max | number:0 }}&#8451;</td>
+						<td>{{ list.pressure | number:0 }} hPa</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="col-md-6">
+			<canvas class="chart chart-line" chart-data="data" chart-series="series" chart-labels="labels"></canvas>
+		</div>
+	</div>
+</div>
