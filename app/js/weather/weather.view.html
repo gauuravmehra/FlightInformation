@@ -1,7 +1,7 @@
 <div class="row weatherListContainer">
     <h1>Weather List</h1>
     <ul>
-        <li class="col-md-4 list" ng-repeat="list in vm.weatherList">
+        <li class="col-md-4 list" ng-repeat="list in vm.weatherList.list">
             <div class="temp-tile {{ list.name | lowercase }}">
                 <a href="javascript:void(0)" ng-click="detailInfo(list.id)"><!--href="/#!/{{ list.name }}"-->
                     <h2>{{ list.name }}</h2>
