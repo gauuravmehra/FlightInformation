@@ -5,12 +5,12 @@
 
     // load all controllers
     var headerController = require('./header/header.Controller'),
-        weatherController = require('./weather/weather.controller'),
-        weatherDetailController = require('./weather/weather-detail.controller');
+        DataController = require('./flight/flight.controller');
+        //weatherDetailController = require('./weather/weather-detail.controller');
 
     module.exports = angular.module('app.controller', [])
         .controller('headerController',                 headerController)
-        .controller('weatherController',                weatherController)
-        .controller('weatherDetailController',          weatherDetailController);
+        .controller('DataController',                   DataController);
+        //.controller('weatherDetailController',          weatherDetailController);
 
 })();

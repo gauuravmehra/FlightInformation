@@ -30,7 +30,8 @@ var config = {
         scss:   ['./app/css/**/*.scss'],
         img:    ['./app/assets/img/**/*.*'],
         font:   ['./app/assets/fonts/**/*.*'],
-        html:   ['./app/js/**/*.html']
+        html:   ['./app/js/**/*.html'],
+        data:   ['./app/assets/data/**/*.*']
     },
     mainfile: {
         js: './app/js/app.js',
@@ -97,6 +98,12 @@ gulp.task('fonts', function () {
         .pipe(gulp.dest(config.dist.path + 'fonts'));
 });
 
+gulp.task('json', function () {
+    return gulp.src('./app/assets/data/**/*.*')
+        .pipe(plugins.plumber())
+        .pipe(gulp.dest(config.dist.path + 'data'));
+});
+
 gulp.task('images', function () {
     return gulp.src(config.filepath.img)
         .pipe(plugins.plumber())
@@ -119,18 +126,13 @@ gulp.task('html', function () {
 
 // Setup watchers - Republish to both patternlab and website
 gulp.task('watch', function () {
-    gulp.watch(config.filepath.font, ['fonts', 'fonts']);
+    gulp.watch(config.filepath.font, ['fonts']);
+    gulp.watch(config.filepath.data, ['json']);
     gulp.watch(config.filepath.js, ['script']);
     gulp.watch(config.filepath.img, ['images']);
     gulp.watch(config.filepath.scss, ['sass']);
     gulp.watch(config.filepath.html, ['html']);
 });
-
-// gulp.task('publish', ['clean'], function () {
-//     return gulp.src(config.buildAssets)
-//         .pipe(plugins.plumber())
-//         .pipe(gulp.dest(config.dist));
-// });
 
 gulp.task('clean', function () {
     del.sync(config.dist, {force: true});
@@ -143,10 +145,10 @@ function errorHandler (error) {
 }
 
 gulp.task('default', function (callBack) {
-    runSequence('html', 'fonts', 'script', 'sass', 'images', 'watch', callBack);
+    runSequence('html', 'fonts', 'json', 'script', 'sass', 'images', 'watch', callBack);
 });
 
 // Publish to Web Gulp Task
 gulp.task('publish', function (callBack) {
-    runSequence('html', 'fonts', 'script', 'sass', 'images', callBack);
+    runSequence('html', 'fonts', 'json', 'script', 'sass', 'images', callBack);
 });

@@ -4,10 +4,10 @@
     var angular = require('angular');
 
     // load all directives
-    var WeatherService = require('./weather/weather.service');
+    var DataService = require('./flight/flight.service');
 
 
     module.exports = angular.module('app.service', [])
-        .service('WeatherService', WeatherService);
+        .service('DataService', DataService);
 
 })();

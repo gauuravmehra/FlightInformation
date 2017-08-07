@@ -1,0 +1,21 @@
+[{
+    "city": "New Delhi",
+    "name": "Indira Gandhi International Airport",
+    "code": "DEL"
+},{
+    "city": "Mumbai",
+    "name": "C S M International Airport",
+    "code": "BOM"
+},{
+    "city": "Bangalore",
+    "name": "Bangalore Airport",
+    "code": "BLR"
+},{
+    "city": "Kolkata",
+    "name": "Netaji S C Bose International Airport",
+    "code": "CCU"
+},{
+    "city": "Chennai",
+    "name": "Menmbarkam Airport",
+    "code": "MAA"
+}]

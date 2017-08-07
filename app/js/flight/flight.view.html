@@ -1,0 +1,118 @@
+<div class="row flightListContainer">
+    <section class="col-md-3">
+        <div class="panel panel-info">
+            <div class="panel-heading">Search</div>
+            <div class="panel-body">
+                <form ng-submit="vm.search()">
+                    
+                    <div class="btn-group" id="journey-select">
+                        <label class="checkbox-inline">
+                            <input type="radio" name="journeyType" ng-model='vm.formType' ng-value='"return"'> Return
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="radio" name="journeyType" ng-model='vm.formType' ng-value='"oneway"'> One Way
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="source">Source</label>
+                        <select class="form-control" id="source" aria-label="Source">
+                            <option>Select</option>
+                            <option ng-repeat="list in vm.AirportList" value="{{::list.code}}">{{::list.city }}</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <select class="form-control" id="destination" aria-label="Destination">
+                            <option>Select</option>
+                            <option ng-repeat="list in vm.AirportList" value="{{::list.code}}">{{::list.city }}</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="departure">Departure</label>
+                        <input type="date" class="form-control" on-blur ng-model="vm.data.departure" id="departure" placeholder="Departure Date" aria-label="Departure Date" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return">Return</label>
+                        <input type="date" class="form-control" id="return" placeholder="Return Date" aria-label="Return Date">
+                    </div>
+                    <div class="form-group">
+                        <label for="passenger">Passenger</label>
+                        <select class="form-control" id="passenger" aria-label="Passenger Count">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <button type="submit">Search Flight</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">Filter</div>
+            <div class="panel-body">
+                <div range-slider min="0" max="20000" step="500" model-min="vm.rangemin" model-max="vm.rangemax" step="5" filter="currency" filter-options="&#8377;" on-handle-up="vm.filterData()"></div>
+            </div>
+        </div>
+    </section>
+    <section ng-if="vm.result.departure.length === 0 && vm.result.returnDate.length === 0">
+        No result Found!
+    </section>
+    <section class="col-md-9">
+        <div ng-hide="vm.result.length">
+            <h1>Search for the flights!</h1>
+        </div>
+        <div ng-if="vm.result.departure.length > 0 || vm.result.returnDate.length > 0">
+            <div class="panel panel-info" ng-if="vm.result.departure.length > 0">
+                <div class="panel-heading">
+                    <span class="label label-info" ng-bind="::vm.data.source"></span> <i class="glyphicon glyphicon-menu-right"></i> <span class="label label-info" ng-bind="::vm.data.destination"></span>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="flight in vm.result.departure | orderBy:'+fare' track by $index" ng-if="flight.fare >= vm.rangemin && flight.fare <= vm.rangemax">
+                        <a href="javascript:void(0)" class="clearfix">
+                            <ul class="col-md-10">
+                                <li ng-bind="::flight.flightNumber"></li>
+                                <li ng-bind="::flight.airline"></li>
+                                <li>Departs: {{::flight.departure | date:"h:mma"}}</li>
+                                <li>Arrival: {{::flight.arrival | date:"h:mma"}}</li>
+                                <li><strong>INR <span>{{::flight.fare}}</span></strong></li>
+                            </ul>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary pull-right">Book Now</button>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="panel panel-info" ng-if="vm.result.returnDate.length > 0 && !vm.data.isOneway">
+                <div class="panel-heading">
+                    <span class="label label-info" ng-bind="::vm.data.destination"></span> <i class="glyphicon glyphicon-menu-right"></i> <span class="label label-info" ng-bind="::vm.data.source"></span>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="flight in vm.result.returnDate | orderBy:'+fare' track by $index" ng-if="flight.fare >= vm.rangemin && flight.fare <= vm.rangemax">
+                        <a href="javascript:void(0)" class="clearfix">
+                            <ul class="col-md-10">
+                                <li ng-bind="::flight.flightNumber"></li>
+                                <li ng-bind="::flight.airline"></li>
+                                <li>Departs: {{::flight.departure | date:"h:mma"}}</li>
+                                <li>Arrival: {{::flight.arrival | date:"h:mma"}}</li>
+                                <li><strong>INR <span>{{::flight.fare}}</span></strong></li>
+                            </ul>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary pull-right">Book Now</button>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+    

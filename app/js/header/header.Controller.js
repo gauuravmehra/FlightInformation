@@ -4,7 +4,7 @@
     var headerController = function () {
         
         var vm = this;
-        vm.title = 'Weather Forcast';
+        vm.title = 'Flight Search Engine';
 
     };
 
